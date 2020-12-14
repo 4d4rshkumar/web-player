@@ -1,23 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React, { useState } from "react";
+import ReactPlayer from 'react-player'
 function App() {
+  const [l, setL] = useState("");
+  const [text, settext] = useState("");
+
+  function handleChange(event) {
+    console.log(event.target.value);
+    setL(event.target.value);
+  }
+
+  function handleClick(event) {
+    settext(l);
+
+    event.preventDefault();
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h1>Anime</h1>
+      <form onSubmit={handleClick}>
+        <input
+          onChange={handleChange}
+          type="text"
+          placeholder="Enter url"
+          value={l}
+        />
+        <button type="submit">Submit</button>
+      </form>
+
+      <ReactPlayer
+          url={text}
+          className='react-player'
+          playing
+        />
     </div>
   );
 }
